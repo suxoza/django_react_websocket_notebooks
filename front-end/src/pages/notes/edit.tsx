@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 
 import NoteService from "services/noteService";
@@ -6,6 +6,8 @@ import FormComponent from "components/formComponent";
 import { NoteInterface } from "interfaces/notesInterface";
 import { toast } from "react-toastify";
 
+
+// import WebSocketComponent from 'components/webSocket'
 
 const EditNote = () => {
 
@@ -31,30 +33,44 @@ const EditNote = () => {
         }).then(() => {
             setLoadingStatus(false)
         })
-
-        setTimeout(() => {
-            setLoadingStatus(false)
-        }, 2000);
     }
 
     useEffect(() => {
-        console.log('got answer from child ....', formIsValid)
+        // console.log('got answer from child ....', formIsValid)
     }, [formIsValid])
+
+
+    // need to block inputs here
+    const on_inputs_change = useCallback((data: any) => {
+        if(Object.keys(data).length)
+            console.log(data)
+        else
+            console.log('no changes')
+    }, [])
+
+
 
     return (
         <>
+            {/* <WebSocketComponent 
+                on_message={() => console.log}
+                on_status_change={() => console.log}
+                get_message={send_message}
+            /> */}
+
             <div className="w-full flex items-center justify-center flex-col gap-y-5">
                 <div className="text-gray-700 text-3xl border-b-2 w-full flex justify-center pb-3">
-                    {state.file_name}
+                    {state?.file_name}
                 </div>
                 <div className="flex items-center justify-center flex-col w-11/12 lg:w-1/2 gap-y-4">
 
                     <FormComponent 
-                        default_text={state.text}
-                        default_content={state.content}
+                        default_text={state?.text}
+                        default_content={state?.content}
                         form_ref={formRef}
                         on_submit={submitForm}
                         setFormIsValid={setFormIsValid}
+                        on_inputs_change={on_inputs_change}
                     />
                 
                     <div onClick={() => formRef?.current?.requestSubmit()} className={(!formIsValid && 'opacity-25 cursor-auto hover:bg-inherit')+` py-2 w-full bg-blue-500 flex items-center justify-center text-white rounded-xl hover:bg-green-500 cursor-pointer text-xl`}>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,8 +41,10 @@ INSTALLED_APPS = [
     # external
     "rest_framework",
     "corsheaders",
+    "channels",
     # self
     "notes",
+    "web_socket",
 ]
 
 MIDDLEWARE = [
@@ -83,6 +86,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+        "TEST": {
+            "NAME": BASE_DIR / "db_test.sqlite3",
+        },
     }
 }
 
@@ -134,4 +140,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "notes.exception_handlers.custom_exception_handler"
+}
+
+
+ASGI_APPLICATION = "web_socket.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }

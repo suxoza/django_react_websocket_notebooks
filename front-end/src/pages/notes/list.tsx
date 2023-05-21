@@ -20,7 +20,7 @@ const NotesList = () => {
     const deleteNote = (note_id: number) => {
         setLoadingStatus(true)
         service.deleteNote(note_id).then((response: {status: boolean}) => {
-            setNotes(notes?.filter(item => item.id !== note_id) || [])
+            setNotes(notes?.filter(item => item?.id !== note_id) || [])
             toast('Deleted successfully')
         }).catch((error: any) => {
             console.log(error)

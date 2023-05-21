@@ -14,10 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, re_path
+from django.urls import include, re_path, path
+
+from web_socket.routing import websocket_urlpatterns
 
 urlpatterns = [
-    # path("admin/", admin.site.urls),
-    #
-    re_path(f"^", include("notes.urls"))
+    re_path(f"^", include("notes.urls")),
 ]

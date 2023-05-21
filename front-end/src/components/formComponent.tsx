@@ -17,6 +17,7 @@ interface propsInterface {
     form_ref: RefObject<HTMLFormElement>,
     on_submit: CallableFunction,
     setFormIsValid: CallableFunction
+    on_inputs_change?: CallableFunction 
 }
 
 const FormComponent = ({ ...props }: propsInterface) => {
@@ -45,6 +46,18 @@ const FormComponent = ({ ...props }: propsInterface) => {
     }
 
     const formIsValid = useMemo(() => {
+        if(props.on_inputs_change){
+            const changed_items: any = {};
+            (['text', 'content'] as Array<string>).forEach((key: string) => {
+                // @ts-ignore
+                if(props['default_'+key] !== reducerState[key]){
+                    // @ts-ignore
+                    changed_items[key] = reducerState[key]
+                }
+            })
+            props.on_inputs_change(changed_items)
+            
+        }
         return Boolean(reducerState.text?.length && reducerState.content?.length)
     }, [reducerState.text, reducerState.content])
 
