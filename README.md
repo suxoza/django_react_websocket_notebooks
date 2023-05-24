@@ -18,6 +18,6 @@ docker-compose up --build
 
 ## Video Demos
 
-[Simply Crud operations](https://www.loom.com/share/ea9e7036b21448a29ae69367d77a6dd9){:target="_blank"}
-[Web Socket Demo](https://www.loom.com/share/82a69e1d6fe94b769c2b8ced4af7216e){:target="_blank"}
+[Simply Crud operations](https://www.loom.com/share/ea9e7036b21448a29ae69367d77a6dd9)
+[Web Socket Demo](https://www.loom.com/share/82a69e1d6fe94b769c2b8ced4af7216e)
 
