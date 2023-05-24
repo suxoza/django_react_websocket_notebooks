@@ -9,6 +9,10 @@ export default class NoteService {
         return await axiosInstance.get('/')
     } 
 
+    public async getNote(note_id: number): Promise<NoteInterface> {
+        return await axiosInstance.get(`/${note_id}`)
+    }
+
     public async createNewNote(note: NoteInterface): Promise<NoteInterface> {
         return await axiosInstance.post('/', note)
     }

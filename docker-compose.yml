@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+
+  djangoapp:
+    build: './server'
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+    
+  react:
+    build: './front-end'
+    user: nobody
+    ports:
+      - "80:80"
+    depends_on:
+      - djangoapp
+
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+
+  

@@ -10,7 +10,7 @@ import { NoteInterface } from "interfaces/notesInterface";
 
 const CreateNote = () => {
 
-    const [ service, setLoadingStatus ] = useOutletContext<NoteService | any>();
+    const [ service, getNote, setLoadingStatus ] = useOutletContext<NoteService | any>();
     const navigate = useNavigate()
     
     const formRef = useRef<HTMLFormElement>(null)

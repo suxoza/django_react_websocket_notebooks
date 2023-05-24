@@ -16,6 +16,8 @@ class NotesList(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         request.data["created_by"] = f"{Services().uniq_user_identifier(request.META)}"
+        # note = self.get_object()
+        # note.history.add(note)
         return super().post(request, *args, **kwargs)
 
 

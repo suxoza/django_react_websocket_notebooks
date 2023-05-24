@@ -22,7 +22,7 @@ class Note(models.Model):
 
 
 class NotesEditHistory(models.Model):
-    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name="note")
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name="history")
     current_owner = models.CharField(max_length=100, default=0)
 
     text = models.CharField(max_length=160, default="")

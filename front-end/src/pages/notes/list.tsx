@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const NotesList = () => {
 
-    const [ service, setLoadingStatus ] = useOutletContext<NoteService | any>();
+    const [ service, getNode, setLoadingStatus ] = useOutletContext<NoteService | any>();
     const [ notes, setNotes ] = useState<NoteInterface[] | null>(null)
 
     useEffect(() => {
